@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="W2C1HW" board="Alchitry Au+" language="Lucid" version="3">
+  <files>
+    <src top="true">au_plus_top.luc</src>
+    <src>hex_digit_lut.luc</src>
+    <component>edge_detector.luc</component>
+    <component>counter.luc</component>
+    <component>reset_conditioner.luc</component>
+    <component>pipeline.luc</component>
+    <component>button_conditioner.luc</component>
+    <component>decoder.luc</component>
+    <src>multi_seven_seg.luc</src>
+    <constraint lib="true">alchitry.acf</constraint>
+    <constraint lib="true">io.acf</constraint>
+    <constraint lib="true">au.xdc</constraint>
+  </files>
+</project>

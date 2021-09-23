@@ -1,0 +1,76 @@
+module au_plus_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+    output io_led [3][8],   // LEDs on IO Shield
+    output io_seg [8],      // 7-segment LEDs on IO Shield
+    output io_sel [4],      // Digit select on IO Shield
+    input io_button [5],    // 5 buttons on IO Shield
+    input io_dip [3][8]     // DIP switches on IO Shield
+  ) {
+  
+  sig rst;                  // reset signal 
+  sig sg_add [16];
+  sig sg_sub [16];
+  sig sg_mult [16];
+  
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+    
+    button_conditioner btn_add;
+    button_conditioner btn_sub;
+    button_conditioner btn_mult;
+    edge_detector add (#RISE(1), #FALL(0));
+    edge_detector sub (#RISE(1), #FALL(0));
+    edge_detector mult (#RISE(1), #FALL(0));
+  }
+  
+  .clk(clk), .rst(rst) {
+    dff tally[16] (#INIT(0));  
+    multi_seven_seg seg_display;
+  }
+  
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    usb_tx = usb_rx;        // loop serial port
+    
+    led = 8h00;             // turn LEDs off
+    
+    io_led = 3x{{8h00}};    // turn LEDs off
+    io_seg = 8hff;          // turn segments off
+    io_sel = 4hf;           // select no digits
+    
+    // Input Management
+    btn_add.in = io_button[4];
+    btn_sub.in = io_button[3];
+    btn_mult.in = io_button[2];
+    add.in = btn_add.out;
+    sub.in = btn_sub.out;
+    mult.in = btn_mult.out;
+    
+    // Calculations
+    sg_add = tally.q + c{io_dip[1], io_dip[0]};
+    sg_sub = tally.q - c{io_dip[1], io_dip[0]};
+    sg_mult = tally.q * c{io_dip[1], io_dip[0]};
+    
+    // Editing
+    if (add.out)
+      tally.d = sg_add;
+    else if (sub.out)
+      tally.d = sg_sub;
+    else if (mult.out)
+      tally.d = sg_mult;
+    
+    // Readout
+    seg_display.values = {tally.q[15:12], tally.q[11:8], tally.q[7:4], tally.q[3:0]};
+    io_seg = ~seg_display.seg;
+    io_sel = ~seg_display.sel;
+  }
+}

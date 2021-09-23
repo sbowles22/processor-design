@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="W1C2HW" board="Alchitry Au+" language="Lucid" version="3">
+  <files>
+    <component>reset_conditioner.luc</component>
+    <src top="true">au_plus_top.luc</src>
+    <constraint lib="true">alchitry.acf</constraint>
+    <constraint lib="true">io.acf</constraint>
+    <constraint lib="true">au.xdc</constraint>
+  </files>
+</project>

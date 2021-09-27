@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="testt" board="Alchitry Au+" language="Lucid" version="3">
+  <files>
+    <component>uart_rx.luc</component>
+    <component>reset_conditioner.luc</component>
+    <component>uart_tx.luc</component>
+    <src>hello_world_rom.luc</src>
+    <src>greeter.luc</src>
+    <src top="true">au_plus_top.luc</src>
+    <constraint lib="true">alchitry.acf</constraint>
+    <constraint lib="true">au.xdc</constraint>
+    <core name="mig_7series_0">
+      <src>mig_7series_0.xci</src>
+      <stub>mig_7series_0_stub.v</stub>
+    </core>
+  </files>
+</project>

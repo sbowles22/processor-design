@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tftg256-1" LaunchTime="1632095859">
+<GenRun Id="synth_1" LaunchPart="xc7a100tftg256-1" LaunchTime="1632421728">
   <File Type="VDS-TIMING-PB" Name="au_plus_top_0_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="au_plus_top_0_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="au_plus_top_0.dcp"/>
@@ -14,7 +14,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/reset_conditioner_1.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/reset_conditioner_1.v"/>
-        <Attr Name="ImportTime" Val="1632095849"/>
+        <Attr Name="ImportTime" Val="1632421719"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -23,7 +23,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/au_plus_top_0.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/au_plus_top_0.v"/>
-        <Attr Name="ImportTime" Val="1632095849"/>
+        <Attr Name="ImportTime" Val="1632421719"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>

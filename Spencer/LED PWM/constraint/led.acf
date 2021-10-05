@@ -1,0 +1,28 @@
+pin io_led[0] B21;
+pin io_led[1] B20;
+pin io_led[2] B18;
+
+pin io_dip[0][0] B30 pulldown;
+pin io_dip[0][1] B31 pulldown;
+pin io_dip[0][2] B33 pulldown;
+pin io_dip[0][3] B34 pulldown;
+pin io_dip[0][4] B36 pulldown;
+pin io_dip[0][5] B37 pulldown;
+pin io_dip[0][6] B39 pulldown;
+pin io_dip[0][7] B40 pulldown;
+pin io_dip[1][0] B42 pulldown;
+pin io_dip[1][1] B43 pulldown;
+pin io_dip[1][2] B45 pulldown;
+pin io_dip[1][3] B46 pulldown;
+pin io_dip[1][4] B48 pulldown;
+pin io_dip[1][5] B49 pulldown;
+pin io_dip[1][6] A27 pulldown;
+pin io_dip[1][7] A28 pulldown;
+pin io_dip[2][0] A30 pulldown;
+pin io_dip[2][1] A31 pulldown;
+pin io_dip[2][2] A33 pulldown;
+pin io_dip[2][3] A34 pulldown;
+pin io_dip[2][4] A36 pulldown;
+pin io_dip[2][5] A37 pulldown;
+pin io_dip[2][6] A39 pulldown;
+pin io_dip[2][7] A40 pulldown;

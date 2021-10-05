@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tftg256-1" LaunchTime="1632697928">
+<GenRun Id="synth_1" LaunchPart="xc7a100tftg256-1" LaunchTime="1632794254">
   <File Type="VDS-TIMING-PB" Name="au_plus_top_0_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="au_plus_top_0_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="au_plus_top_0.dcp"/>
@@ -14,7 +14,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/button_conditioner_2.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/button_conditioner_2.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -23,7 +23,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/counter_6.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/counter_6.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -32,7 +32,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/decoder_8.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/decoder_8.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -41,7 +41,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/edge_detector_3.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/edge_detector_3.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -50,7 +50,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/hex_digit_lut_7.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/hex_digit_lut_7.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -59,7 +59,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/multi_seven_seg_4.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/multi_seven_seg_4.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -68,7 +68,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/pipeline_5.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/pipeline_5.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -77,7 +77,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/reset_conditioner_1.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/reset_conditioner_1.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -86,7 +86,7 @@
     <File Path="$PSRCDIR/sources_1/imports/verilog/au_plus_top_0.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../verilog/au_plus_top_0.v"/>
-        <Attr Name="ImportTime" Val="1632697919"/>
+        <Attr Name="ImportTime" Val="1632794250"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>

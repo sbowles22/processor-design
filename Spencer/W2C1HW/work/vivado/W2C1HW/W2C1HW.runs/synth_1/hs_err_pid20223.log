@@ -1,0 +1,16 @@
+#
+# An unexpected error has occurred (6)
+#
+Stack:
+/lib/x86_64-linux-gnu/libc.so.6(+0x43f60) [0x7fd30a40ff60]
+/lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7) [0x7fd30a40fed7]
+/lib/x86_64-linux-gnu/libc.so.6(abort+0x121) [0x7fd30a3f1535]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/libtcl8.5.so(Tcl_PanicVA+0x10e) [0x7fd305b29a8e]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/libtcl8.5.so(Tcl_Panic+0x8c) [0x7fd305b29b9c]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/libtcl8.5.so(TclStackFree+0x49) [0x7fd305af3fb9]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/libtcl8.5.so(TclEvalObjEx+0x366) [0x7fd305ab4506]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/librdi_commonmain.so(+0xce23) [0x7fd30ab5be23]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/libtcl8.5.so(Tcl_Main+0x1d0) [0x7fd305b1f2f0]
+/tools/Xilinx/Vivado/2021.1/lib/lnx64.o/librdi_common.so(+0xaa710b) [0x7fd30b80c10b]
+/lib/x86_64-linux-gnu/libpthread.so.0(+0x9182) [0x7fd30a3ae182]
+/lib/x86_64-linux-gnu/libc.so.6(clone+0x3f) [0x7fd30a4e9b1f]

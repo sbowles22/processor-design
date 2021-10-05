@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-| Date         : Sun Sep 26 19:13:26 2021
+| Date         : Mon Sep 27 21:58:37 2021
 | Host         : spencer-XPS-15-9570 running 64-bit Ubuntu 19.04
 | Command      : report_utilization -file au_plus_top_0_utilization_placed.rpt -pb au_plus_top_0_utilization_placed.pb
 | Design       : au_plus_top_0

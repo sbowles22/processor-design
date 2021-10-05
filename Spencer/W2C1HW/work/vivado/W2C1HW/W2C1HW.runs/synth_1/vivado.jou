@@ -2,8 +2,8 @@
 # Vivado v2021.1 (64-bit)
 # SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
 # IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Sun Sep 26 19:12:24 2021
-# Process ID: 21980
+# Start of session at: Mon Sep 27 21:57:41 2021
+# Process ID: 20305
 # Current directory: /home/spencer/processor-design/Spencer/W2C1HW/work/vivado/W2C1HW/W2C1HW.runs/synth_1
 # Command line: vivado -log au_plus_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_plus_top_0.tcl
 # Log file: /home/spencer/processor-design/Spencer/W2C1HW/work/vivado/W2C1HW/W2C1HW.runs/synth_1/au_plus_top_0.vds

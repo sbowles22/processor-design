@@ -1,0 +1,4 @@
+Warnings in file /home/spencer/processor-design/Jansher/MixingColors/source/au_plus_top.luc:
+    Line 1, Column 7 : The module name "mojo_top" doesn't match the file name "au_plus_top"
+Errors in file /home/spencer/Downloads/alchitry-labs-1.2.5/library/components/alchitry.acf:
+    Line 17, Column 4 : The port usb_tx is not a port of the top module

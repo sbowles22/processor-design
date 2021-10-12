@@ -12,6 +12,11 @@ module au_plus_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    
+    .rst(rst) {
+      cpu cpu;        // our snazzy CPU
+      dff led_reg[8]; // storage for LED value
+    }
   }
   
   always {
@@ -21,5 +26,17 @@ module au_plus_top (
     led = 8h00;             // turn LEDs off
 
     usb_tx = usb_rx;        // echo the serial data
+    
+    cpu.din = 8hxx;           // default to don't care
+    
+    // if cpu uses address 128
+    if (cpu.address == 128) {
+      if (cpu.write)
+        led_reg.d = cpu.dout; // update the LED value
+      if (cpu.read)
+        cpu.din = led_reg.q;  // let the CPU read the LED value
+    }
+    
+    led = led_reg.q;          // connect LEDs to led_reg
   }
 }

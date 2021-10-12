@@ -2,7 +2,9 @@
 <project name="midterm-processor" board="Alchitry Au+" language="Lucid" version="3">
   <files>
     <component>reset_conditioner.luc</component>
+    <src>cpu.luc</src>
     <src top="true">au_plus_top.luc</src>
+    <src>instRom.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">au.xdc</constraint>
   </files>

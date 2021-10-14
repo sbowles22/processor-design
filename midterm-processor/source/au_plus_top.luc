@@ -1,9 +1,27 @@
+global InOut {
+  // Addresses for non-general-purpous ram
+  const DIP0_ADDR = 8hF7; // Dip switches
+  const DIP1_ADDR = 8hF8;
+  const DIP2_ADDR = 8hF9;
+  const LED0_ADDR = 8hFA; // LED Lights
+  const LED1_ADDR = 8hFB;
+  const LED2_ADDR = 8hFC;
+  const BTNS_ADDR = 8hFD; // 5 IO Buttons (not rst)
+  const HX7L_ADDR = 8hFE; // Left  2 hex digits on 7 segment display
+  const HX7R_ADDR = 8hFF; // Right 2 hex digits on 7 segment display
+}
+
 module au_plus_top (
     input clk,              // 100MHz clock
     input rst_n,            // reset button (active low)
     output led [8],         // 8 user controllable LEDs
     input usb_rx,           // USB->Serial input
-    output usb_tx           // USB->Serial output
+    output usb_tx,          // USB->Serial output
+    output io_led [3][8],   // LEDs on IO Shield
+    output io_seg [8],      // 7-segment LEDs on IO Shield
+    output io_sel [4],      // Digit select on IO Shield
+    input io_button [5],    // 5 buttons on IO Shield
+    input io_dip [3][8]     // DIP switches on IO Shield
   ) {
   
   sig rst;                  // reset signal
@@ -12,10 +30,21 @@ module au_plus_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    simple_ram gp_ram (#DEPTH(247), #SIZE(8));
     
     .rst(rst) {
       cpu cpu;        // our snazzy CPU
       dff led_reg[8]; // storage for LED value
+      dff dip0_reg[8];
+      dff dip1_reg[8];
+      dff dip2_reg[8];
+      dff led0_reg[8];
+      dff led1_reg[8];
+      dff led2_reg[8];
+      dff btns_reg[8];
+      dff hx7l_reg[8];
+      dff hx7r_reg[8];
+      multi_seven_seg seg_display; // Seven segment display controller
     }
   }
   
@@ -24,19 +53,71 @@ module au_plus_top (
     rst = reset_cond.out;   // conditioned reset
     
     led = 8h00;             // turn LEDs off
+    io_led = 3x{{8h00}};    // turn LEDs off
+    io_seg = 8hff;          // turn segments off
+    io_sel = 4hf;           // select no digits
 
     usb_tx = usb_rx;        // echo the serial data
     
     cpu.din = 8hxx;           // default to don't care
     
-    // if cpu uses address 128
-    if (cpu.address == 128) {
-      if (cpu.write)
-        led_reg.d = cpu.dout; // update the LED value
-      if (cpu.read)
-        cpu.din = led_reg.q;  // let the CPU read the LED value
-    }
+    gp_ram.address = cpu.address;
+    gp_ram.write_data = cpu.dout;
+    gp_ram.write_en = 1b0;
+    
+    case (cpu.address) {
+      InOut.DIP0_ADDR:
+        if (cpu.read)
+          cpu.din = dip0_reg.q;
+      InOut.DIP1_ADDR:
+        if (cpu.read)
+          cpu.din = dip1_reg.q;
+      InOut.DIP2_ADDR:
+        if (cpu.read)
+          cpu.din = dip2_reg.q;
+      InOut.LED0_ADDR:
+        if (cpu.write)
+          led0_reg.d = cpu.dout; // X
+        if (cpu.read)
+          cpu.din = led0_reg.q;
+      InOut.LED1_ADDR:
+        if (cpu.write)
+          led1_reg.d = cpu.dout; // X
+        if (cpu.read)
+          cpu.din = led1_reg.q;
+      InOut.LED2_ADDR:
+        if (cpu.write)
+          led2_reg.d = cpu.dout; // X
+        if (cpu.read)
+          cpu.din = led2_reg.q;
+      InOut.BTNS_ADDR:
+        if (cpu.read)
+          cpu.din = btns_reg.q;
+      InOut.HX7L_ADDR:
+        if (cpu.write)
+          hx7l_reg.d = cpu.dout; // X
+        if (cpu.read)
+          cpu.din = hx7l_reg.q;
+      InOut.HX7R_ADDR:
+        if (cpu.write)
+          hx7r_reg.d = cpu.dout; // X
+        if (cpu.read)
+          cpu.din = hx7r_reg.q;
+      default:
+        if (cpu.write)
+          gp_ram.write_en = cpu.write;
+        if (cpu.read)
+          cpu.din = gp_ram.read_data;
+    } 
     
     led = led_reg.q;          // connect LEDs to led_reg
+    dip0_reg.d = io_dip[0];
+    dip1_reg.d = io_dip[1];
+    dip2_reg.d = io_dip[2];
+    io_led = {led0_reg.q, led1_reg.q, led2_reg.q};
+    btns_reg.d = c{3b0, io_button};
+    seg_display.values = {hx7l_reg.q[7:4], hx7l_reg.q[3:0], hx7r_reg.q[7:4], hx7r_reg.q[3:0]};
+    io_seg = ~seg_display.seg;
+    io_sel = ~seg_display.sel;
   }
 }

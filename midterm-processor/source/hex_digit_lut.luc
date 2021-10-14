@@ -1,0 +1,26 @@
+module hex_digit_lut (
+    input value [4],  
+    output segs [8]
+  ) {
+
+  always {
+    case (value) {
+      h0: segs = 8b00111111;
+      h1: segs = 8b00000110;
+      h2: segs = 8b01011011;
+      h3: segs = 8b01001111;
+      h4: segs = 8b01100110;
+      h5: segs = 8b01101101;
+      h6: segs = 8b01111101;
+      h7: segs = 8b00000111;
+      h8: segs = 8b01111111;
+      h9: segs = 8b01100111;
+      ha: segs = 8b01110111;
+      hb: segs = 8b01111100;
+      hc: segs = 8b00111001;
+      hd: segs = 8b01011110;
+      he: segs = 8b01111001;
+      hf: segs = 8b01110001;
+      default: segs = 8b00000000;
+    }
+}

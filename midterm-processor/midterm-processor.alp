@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="midterm-processor" board="Alchitry Au+" language="Lucid" version="3">
   <files>
+    <component>simple_ram.v</component>
+    <component>counter.luc</component>
     <component>reset_conditioner.luc</component>
+    <component>simple_dual_ram.v</component>
     <src>cpu.luc</src>
     <src top="true">au_plus_top.luc</src>
     <src>instRom.luc</src>
+    <src>hex_digit_lut.luc</src>
+    <component>decoder.luc</component>
+    <src>multi_seven_seg.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
+    <constraint lib="true">io.acf</constraint>
     <constraint lib="true">au.xdc</constraint>
   </files>
 </project>

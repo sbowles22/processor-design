@@ -14,7 +14,7 @@ get_m_n_r0:
   SET R2, 248     // 0xF7 (DIP1 REG ADDR)
   LOAD R2, R2, 0  // Load n to R2
 segments:
-  EQ R4, R3, R2   // if r = n,
+  EQ R4, R3, R2   // if they have the same value,
   SET R0, display
 shift:
   SET R1, R2       

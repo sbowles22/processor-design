@@ -13,9 +13,10 @@ get_m_n:
   LOAD R1, R2, 0  // Load m to R1
   SET R2, 248     // 0xF7 (DIP1 REG ADDR)
   LOAD R2, R2, 0  // Load n to R2
-find_remainder:
+set_r0:
   SET R3, 0
   ADD R3, R3, R2
+find_remainder:
   LT R4, R3, R2   // if r < n,
   BEQ R4, 1       // jump to step 2 of algo, else, skip line to try to find remainder by subtracting n
   SET R0, equiv_test
@@ -29,7 +30,7 @@ shift:
   ADD R1, R1, R2 
   SET R2, 0       // n <- r 
   ADD R2, R2, R3
-  SET R0, find_remainder // go back to step 1 
+  SET R0, set_r0 // go back to step 1 
 display:
   SET R1, 255     // 0xFF (HX7R REG ADDR)
   STORE R2, R1, 0 // Set HX7R to n, the gcf

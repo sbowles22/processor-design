@@ -1,4 +1,4 @@
-begin: // program lights up entire seven segment display, then takes values m and n from dipset switches 0 and 1, and turns off the corresponding segments of the display if m=n
+begin: // program lights up entire seven segment display, then takes values m and n from dipset switches 0 and 1, and turns off the corresponding segments of the display if BOTH dipswitches are on or  off
   SET R1, 1       // turns segments' led on
   SET R2, 254     // 0xFE (HX7L REG ADDR)
   STORE R1, R2, 1 // 0xFF (HX7R REG ADDR)

@@ -1,5 +1,6 @@
 begin: 
 	SET R1 253 //reg address button 
+	STORE R1, R1, 0
 	BEQ R1, 1
 	SET R0, begin
 		

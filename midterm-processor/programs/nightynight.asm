@@ -1,7 +1,8 @@
 begin: 
 	SET R1, 253 //reg address button 
 	STORE R1, R1, 0
-	BEQ R1, 1	
+	BNEQ R1, 1
+	SET R0, begin
 lightLED:
 	SET R2, 250 //reg address led[0]
 	SET R3, 251 //reg address led[1]

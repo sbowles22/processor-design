@@ -1,0 +1,19 @@
+module fail (
+    input clk,  // clock
+    input numone [8],
+    input numtwo [8],
+    output newnum [64],
+  ) {
+.clk(clk){
+ dff numone_reg [8]; 
+ dff numtwo_reg [8];
+ dff newnum_reg [64];
+ }
+  always {
+    numone_reg.d = numone;
+    numtwo_reg.d = numtwo;
+    newnum = newnum_reg.q;
+    
+    newnum_reg.d = (numone_reg.q * numtwo_reg.q)*(numone_reg.q * numtwo_reg.q)*(numone_reg.q * numtwo_reg.q);
+  }
+}

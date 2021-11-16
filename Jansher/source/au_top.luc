@@ -1,0 +1,29 @@
+module au_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx           // USB->Serial output
+  ) {
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+    fail fail;
+  }
+  
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    led = 8h00;             // turn LEDs off
+    io_seg = 8hff;
+    io_sel = 4hf;
+    fail.numone = io_dip[0];
+    fail.numtwo = io_dip[1];
+    io_led = {fail.newnum[16+;8], fail.newnum[8+:8], fail.newnum[0+:8]};
+  }
+}

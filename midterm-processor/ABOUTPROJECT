@@ -1,0 +1,11 @@
+In my final project for Honors Processor Design, I attempted to implement a cache into our midterm final processor. If you don't know, a cache essentially is a level of memory hierarchy in between the processor and the main memory of a processor. 
+
+I used the built-in LRU (least recently used) cache found as an Alchitry Au+ component, making it so every time the cache is flushed, an LED should turn on. Some notable things I did in this project were wiping any instance of DDR3 in the memory interface, clock, and cache, as DDR3 was used in each component. What I intend for this cache to do is for it to read/write depending on what the CPU reads/writes and flush the memory when it fills up. 
+
+I had a lot of problems with this project—simply put, I just wasn't understanding what I was trying to do at times, and I spent hours restarting just to see how I could progress differently from my last attempt. 
+
+I used the following sources extensively:
+- https://alchitry.com/ddr3-memory 
+- "Computer Organization and Design: The Hardware/Software Interface 5th Edition" by David A. Patterson and John L. Hennessy
+- "Learning FPGAs: Digital Design for Beginners with Mojo and Lucid HDL" by Justin Rajewski
+- https://alchitry.com/projects/gpu

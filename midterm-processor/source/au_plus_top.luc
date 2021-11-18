@@ -1,5 +1,5 @@
 global InOut {
-  // Addresses for non-general-purpous ram
+  // Addresses for non-general-purpose ram
   const DIP0_ADDR = 8hF7; // Dip switches
   const DIP1_ADDR = 8hF8;
   const DIP2_ADDR = 8hF9;
@@ -14,7 +14,7 @@ global InOut {
 module au_plus_top (
     input clk,              // 100MHz clock
     input rst_n,            // reset button (active low)
-    output ready,
+    output ready, // when it outputs this "ready", the cache will "gear up" essentially
     output led [8],         // 8 user controllable LEDs
     input usb_rx,           // USB->Serial input
     output usb_tx,          // USB->Serial output
@@ -27,9 +27,9 @@ module au_plus_top (
   
   sig rst;                  // reset signal
   
-   clk_wiz_0 clk_wiz;
+   clk_wiz_0 clk_wiz; .. clock that allows for 200hz 
   
-   mig_wrapper mig;
+   mig_wrapper mig; // memory interface
   
   .clk(mig.ui_clk) {
     reset_conditioner reset_cond;
@@ -62,26 +62,20 @@ module au_plus_top (
     
     mig.sys_clk = clk_wiz.clk_out1; // 100MHz clock
     mig.clk_ref = clk_wiz.clk_out2; // 200MHz clock
-    mig.sys_rst = !clk_wiz.locked;  // reset when clk_wiz isn't locked
-    rst = mig.sync_rst;             // use the reset signal from the mig core
-     
+    mig.sys_rst = !clk_wiz.locked;  
+    rst = mig.sync_rst;            
     
-    mig.sys_clk = clk_wiz.clk_out1; // 100MHz clock
-    mig.clk_ref = clk_wiz.clk_out2; // 200MHz clock
-    mig.sys_rst = !clk_wiz.locked;  // reset when clk_wiz isn't locked
-    rst = mig.sync_rst;             // use the reset signal from the mig core
-    
-    reset_cond.in = ~rst_n; // input raw inverted reset signal
-    rst = reset_cond.out;   // conditioned reset
-    ready = state.q == state.IDLE;
+    reset_cond.in = ~rst_n; 
+    rst = reset_cond.out;  
+    ready = state.q == state.IDLE; // initialize at IDLE state
     led = 8h00;             // turn LEDs off
     io_led = 3x{{8h00}};    // turn LEDs off
     io_seg = 8hff;          // turn segments off
     io_sel = 4hf;           // select no digits
 
-    usb_tx = usb_rx;        // echo the serial data
+    usb_tx = usb_rx;        
     
-    cpu.din = 8hxx;           // default to don't care
+    cpu.din = 8hxx;           
     
     gp_ram.address = cpu.address;
     gp_ram.write_data = cpu.dout;
@@ -97,7 +91,7 @@ module au_plus_top (
     cache.rd_addr = address.q;
     cache.rd_cmd_valid = 0;
     
-    case (cpu.address) {
+    case (cpu.address) { // throughout this case is just reading/writing to cache from cpu info
       InOut.DIP0_ADDR:
         if (cpu.read)
           cpu.din = dip0_reg.q;
@@ -112,20 +106,20 @@ module au_plus_top (
           state.d = state.READ_CMD;
       InOut.LED0_ADDR:
         if (cpu.write)
-          led0_reg.d = cpu.dout; // X
+          led0_reg.d = cpu.dout; 
         if (cpu.read)
           cpu.din = led0_reg.q;
           state.d = state.READ_CMD;
       InOut.LED1_ADDR:
         if (cpu.write)
-          led1_reg.d = cpu.dout; // X
+          led1_reg.d = cpu.dout;
           state.d = state.WRITE_DATA;
         if (cpu.read)
           cpu.din = led1_reg.q;
           state.d = state.READ_CMD;
       InOut.LED2_ADDR:
         if (cpu.write)
-          led2_reg.d = cpu.dout; // X
+          led2_reg.d = cpu.dout; 
           state.d = state.WRITE_DATA;
         if (cpu.read)
           cpu.din = led2_reg.q;
@@ -136,14 +130,14 @@ module au_plus_top (
           state.d = state.READ_CMD;
       InOut.HX7L_ADDR:
         if (cpu.write)
-          hx7l_reg.d = cpu.dout; // X
+          hx7l_reg.d = cpu.dout;
           state.d = state.WRITE_DATA;
         if (cpu.read)
           cpu.din = hx7l_reg.q;
           state.d = state.READ_CMD;
       InOut.HX7R_ADDR:
         if (cpu.write)
-          hx7r_reg.d = cpu.dout; // X
+          hx7r_reg.d = cpu.dout;
           state.d = state.WRITE_DATA;
         if (cpu.read)
           cpu.din = hx7r_reg.q;
@@ -157,7 +151,7 @@ module au_plus_top (
           state.d = state.READ_CMD;
     } 
     
-    led = led_reg.q;          // connect LEDs to led_reg
+    led = led_reg.q;          
     dip0_reg.d = io_dip[0];
     dip1_reg.d = io_dip[1];
     dip2_reg.d = io_dip[2];
@@ -166,15 +160,15 @@ module au_plus_top (
     seg_display.values = {hx7l_reg.q[7:4], hx7l_reg.q[3:0], hx7r_reg.q[7:4], hx7r_reg.q[3:0]};
     io_seg = ~seg_display.seg;
     io_sel = ~seg_display.sel;
-    cache.flush = 1;
-    state.d = state.FLUSH;
-    if (state.FLUSH)
-        led = 8hFF;
+    cache.flush = 1; // flush the cache
+    state.d = state.FLUSH; // state is now flushing
+    if (state.FLUSH) // if we're in the flush state 
+        led = 8hFF; // led turns on 
     case (state.q) {
-      state.WRITE_DATA:
+      state.WRITE_DATA: // writes info to cache
         if (cache.wr_ready) {
           cache.wr_valid = 1;
-          address.d = address.q + 1;
+          address.d = address.q + 1; // cache block address changes
           if (address.q == 8hFF) {
             state.d = state.READ_CMD;
             address.d = 0;

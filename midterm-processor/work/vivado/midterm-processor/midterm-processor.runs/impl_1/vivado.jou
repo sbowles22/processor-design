@@ -2,8 +2,8 @@
 # Vivado v2021.1 (64-bit)
 # SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
 # IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Tue Oct 12 13:01:42 2021
-# Process ID: 3430
+# Start of session at: Tue Oct 19 13:57:31 2021
+# Process ID: 22145
 # Current directory: /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.runs/impl_1
 # Command line: vivado -log au_plus_top_0.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source au_plus_top_0.tcl -notrace
 # Log file: /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.runs/impl_1/au_plus_top_0.vdi

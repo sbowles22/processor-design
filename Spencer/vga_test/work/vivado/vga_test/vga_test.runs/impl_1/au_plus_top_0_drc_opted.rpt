@@ -1,0 +1,46 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
+| Date         : Thu Nov 18 04:01:17 2021
+| Host         : spencer-XPS-15-9570 running 64-bit Ubuntu 19.04
+| Command      : report_drc -file au_plus_top_0_drc_opted.rpt -pb au_plus_top_0_drc_opted.pb -rpx au_plus_top_0_drc_opted.rpx
+| Design       : au_plus_top_0
+| Device       : xc7a100tftg256-1
+| Speed File   : -1
+| Design State : Synthesized
+------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 1
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
++-------------+----------+-------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PLHOLDVIO-2#1 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT timer/x_dim/M_ctr_q[9]_i_2 is driving clock pin of 10 cells. This could lead to large hold time violations. Involved cells are:
+timer/y_dim/M_ctr_q_reg[0], timer/y_dim/M_ctr_q_reg[1],
+timer/y_dim/M_ctr_q_reg[2], timer/y_dim/M_ctr_q_reg[3],
+timer/y_dim/M_ctr_q_reg[4], timer/y_dim/M_ctr_q_reg[5],
+timer/y_dim/M_ctr_q_reg[6], timer/y_dim/M_ctr_q_reg[7],
+timer/y_dim/M_ctr_q_reg[8], timer/y_dim/M_ctr_q_reg[9]
+Related violations: <none>
+
+

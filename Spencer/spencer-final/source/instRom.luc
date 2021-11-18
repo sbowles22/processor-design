@@ -1,0 +1,20 @@
+
+module instRom (
+    input address[8],
+    output inst[16]
+  ) {
+
+  always {
+    inst = c{Inst.NOP, 12b0};
+
+    case (address) {
+      // begin:
+
+      0: inst = c{Inst.SET, 4d11, 8d15};
+      1: inst = c{Inst.SET, 4d12, 8d0};
+      2: inst = c{Inst.SET, 4d13, 8d15};
+      3: inst = c{Inst.RET, 4d0, 8d0};
+
+    }
+  }
+}

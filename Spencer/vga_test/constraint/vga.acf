@@ -1,0 +1,15 @@
+pin color[0][0] B21;
+pin color[0][1] B20;
+pin color[0][2] B18;
+pin color[0][3] B17;
+pin color[1][0] B9;
+pin color[1][1] B8;
+pin color[1][2] B6;
+pin color[1][3] B5;
+pin color[2][0] A21;
+pin color[2][1] A20;
+pin color[2][2] A18;
+pin color[2][3] A17;
+
+pin h_sync B12;
+pin v_sync B11;

@@ -35,15 +35,15 @@ module au_plus_top (
     .rst(rst) {
       cpu cpu;        // our snazzy CPU
       dff led_reg[8]; // storage for LED value
-      dff dip0_reg[8];
-      dff dip1_reg[8];
-      dff dip2_reg[8];
-      dff led0_reg[8];
-      dff led1_reg[8];
-      dff led2_reg[8];
-      dff btns_reg[8];
-      dff hx7l_reg[8];
-      dff hx7r_reg[8];
+      dff dip0_reg[8] (#INIT(0));
+      dff dip1_reg[8] (#INIT(0));
+      dff dip2_reg[8] (#INIT(0));
+      dff led0_reg[8] (#INIT(0));
+      dff led1_reg[8] (#INIT(0));
+      dff led2_reg[8] (#INIT(0));
+      dff btns_reg[8] (#INIT(0));
+      dff hx7l_reg[8] (#INIT(0));
+      dff hx7r_reg[8] (#INIT(0));
       multi_seven_seg seg_display; // Seven segment display controller
     }
   }

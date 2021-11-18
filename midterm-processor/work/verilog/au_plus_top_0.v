@@ -9,7 +9,12 @@ module au_plus_top_0 (
     input rst_n,
     output reg [7:0] led,
     input usb_rx,
-    output reg usb_tx
+    output reg usb_tx,
+    output reg [23:0] io_led,
+    output reg [7:0] io_seg,
+    output reg [3:0] io_sel,
+    input [4:0] io_button,
+    input [23:0] io_dip
   );
   
   
@@ -23,12 +28,23 @@ module au_plus_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
+  wire [8-1:0] M_gp_ram_read_data;
+  reg [8-1:0] M_gp_ram_address;
+  reg [8-1:0] M_gp_ram_write_data;
+  reg [1-1:0] M_gp_ram_write_en;
+  simple_ram_2 #(.DEPTH(8'hf7), .SIZE(4'h8)) gp_ram (
+    .clk(clk),
+    .address(M_gp_ram_address),
+    .write_data(M_gp_ram_write_data),
+    .write_en(M_gp_ram_write_en),
+    .read_data(M_gp_ram_read_data)
+  );
   wire [1-1:0] M_cpu_write;
   wire [1-1:0] M_cpu_read;
   wire [8-1:0] M_cpu_address;
   wire [8-1:0] M_cpu_dout;
   reg [8-1:0] M_cpu_din;
-  cpu_2 cpu (
+  cpu_3 cpu (
     .clk(clk),
     .rst(rst),
     .din(M_cpu_din),
@@ -38,31 +54,153 @@ module au_plus_top_0 (
     .dout(M_cpu_dout)
   );
   reg [7:0] M_led_reg_d, M_led_reg_q = 1'h0;
+  reg [7:0] M_dip0_reg_d, M_dip0_reg_q = 1'h0;
+  reg [7:0] M_dip1_reg_d, M_dip1_reg_q = 1'h0;
+  reg [7:0] M_dip2_reg_d, M_dip2_reg_q = 1'h0;
+  reg [7:0] M_led0_reg_d, M_led0_reg_q = 1'h0;
+  reg [7:0] M_led1_reg_d, M_led1_reg_q = 1'h0;
+  reg [7:0] M_led2_reg_d, M_led2_reg_q = 1'h0;
+  reg [7:0] M_btns_reg_d, M_btns_reg_q = 1'h0;
+  reg [7:0] M_hx7l_reg_d, M_hx7l_reg_q = 1'h0;
+  reg [7:0] M_hx7r_reg_d, M_hx7r_reg_q = 1'h0;
+  wire [8-1:0] M_seg_display_seg;
+  wire [4-1:0] M_seg_display_sel;
+  reg [16-1:0] M_seg_display_values;
+  multi_seven_seg_4 seg_display (
+    .clk(clk),
+    .rst(rst),
+    .values(M_seg_display_values),
+    .seg(M_seg_display_seg),
+    .sel(M_seg_display_sel)
+  );
   
   always @* begin
-    M_led_reg_d = M_led_reg_q;
+    M_led0_reg_d = M_led0_reg_q;
+    M_btns_reg_d = M_btns_reg_q;
+    M_led1_reg_d = M_led1_reg_q;
+    M_hx7r_reg_d = M_hx7r_reg_q;
+    M_hx7l_reg_d = M_hx7l_reg_q;
+    M_dip0_reg_d = M_dip0_reg_q;
+    M_dip1_reg_d = M_dip1_reg_q;
+    M_led2_reg_d = M_led2_reg_q;
+    M_dip2_reg_d = M_dip2_reg_q;
     
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
     led = 8'h00;
+    io_led = 24'h000000;
+    io_seg = 8'hff;
+    io_sel = 4'hf;
     usb_tx = usb_rx;
     M_cpu_din = 8'bxxxxxxxx;
-    if (M_cpu_address == 8'h80) begin
-      if (M_cpu_write) begin
-        M_led_reg_d = M_cpu_dout;
+    M_gp_ram_address = M_cpu_address;
+    M_gp_ram_write_data = M_cpu_dout;
+    M_gp_ram_write_en = 1'h0;
+    
+    case (M_cpu_address)
+      8'hf7: begin
+        if (M_cpu_read) begin
+          M_cpu_din = M_dip0_reg_q;
+        end
       end
-      if (M_cpu_read) begin
-        M_cpu_din = M_led_reg_q;
+      8'hf8: begin
+        if (M_cpu_read) begin
+          M_cpu_din = M_dip1_reg_q;
+        end
       end
-    end
+      8'hf9: begin
+        if (M_cpu_read) begin
+          M_cpu_din = M_dip2_reg_q;
+        end
+      end
+      8'hfa: begin
+        if (M_cpu_write) begin
+          M_led0_reg_d = M_cpu_dout;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_led0_reg_q;
+        end
+      end
+      8'hfb: begin
+        if (M_cpu_write) begin
+          M_led1_reg_d = M_cpu_dout;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_led1_reg_q;
+        end
+      end
+      8'hfc: begin
+        if (M_cpu_write) begin
+          M_led2_reg_d = M_cpu_dout;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_led2_reg_q;
+        end
+      end
+      8'hfd: begin
+        if (M_cpu_read) begin
+          M_cpu_din = M_btns_reg_q;
+        end
+      end
+      8'hfe: begin
+        if (M_cpu_write) begin
+          M_hx7l_reg_d = M_cpu_dout;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_hx7l_reg_q;
+        end
+      end
+      8'hff: begin
+        if (M_cpu_write) begin
+          M_hx7r_reg_d = M_cpu_dout;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_hx7r_reg_q;
+        end
+      end
+      default: begin
+        if (M_cpu_write) begin
+          M_gp_ram_write_en = M_cpu_write;
+        end
+        if (M_cpu_read) begin
+          M_cpu_din = M_gp_ram_read_data;
+        end
+      end
+    endcase
     led = M_led_reg_q;
+    M_dip0_reg_d = io_dip[0+7-:8];
+    M_dip1_reg_d = io_dip[8+7-:8];
+    M_dip2_reg_d = io_dip[16+7-:8];
+    io_led = {M_led0_reg_q, M_led1_reg_q, M_led2_reg_q};
+    M_btns_reg_d = {3'h0, io_button};
+    M_seg_display_values = {M_hx7l_reg_q[4+3-:4], M_hx7l_reg_q[0+3-:4], M_hx7r_reg_q[4+3-:4], M_hx7r_reg_q[0+3-:4]};
+    io_seg = ~M_seg_display_seg;
+    io_sel = ~M_seg_display_sel;
   end
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
       M_led_reg_q <= 1'h0;
+      M_dip0_reg_q <= 1'h0;
+      M_dip1_reg_q <= 1'h0;
+      M_dip2_reg_q <= 1'h0;
+      M_led0_reg_q <= 1'h0;
+      M_led1_reg_q <= 1'h0;
+      M_led2_reg_q <= 1'h0;
+      M_btns_reg_q <= 1'h0;
+      M_hx7l_reg_q <= 1'h0;
+      M_hx7r_reg_q <= 1'h0;
     end else begin
       M_led_reg_q <= M_led_reg_d;
+      M_dip0_reg_q <= M_dip0_reg_d;
+      M_dip1_reg_q <= M_dip1_reg_d;
+      M_dip2_reg_q <= M_dip2_reg_d;
+      M_led0_reg_q <= M_led0_reg_d;
+      M_led1_reg_q <= M_led1_reg_d;
+      M_led2_reg_q <= M_led2_reg_d;
+      M_btns_reg_q <= M_btns_reg_d;
+      M_hx7l_reg_q <= M_hx7l_reg_d;
+      M_hx7r_reg_q <= M_hx7r_reg_d;
     end
   end
   

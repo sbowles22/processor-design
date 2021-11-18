@@ -84,9 +84,14 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/cpu_2.v
-  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/instRom_3.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/counter_6.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/cpu_3.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/decoder_8.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/hex_digit_lut_7.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/instRom_5.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/multi_seven_seg_4.v
   /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/reset_conditioner_1.v
+  /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/simple_ram_2.v
   /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.srcs/sources_1/imports/verilog/au_plus_top_0.v
 }
 OPTRACE "Adding files" END { }
@@ -100,6 +105,9 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 }
 read_xdc /home/spencer/processor-design/midterm-processor/work/constraint/alchitry.xdc
 set_property used_in_implementation false [get_files /home/spencer/processor-design/midterm-processor/work/constraint/alchitry.xdc]
+
+read_xdc /home/spencer/processor-design/midterm-processor/work/constraint/io.xdc
+set_property used_in_implementation false [get_files /home/spencer/processor-design/midterm-processor/work/constraint/io.xdc]
 
 read_xdc /home/spencer/Downloads/alchitry-labs-1.2.5/library/components/au.xdc
 set_property used_in_implementation false [get_files /home/spencer/Downloads/alchitry-labs-1.2.5/library/components/au.xdc]

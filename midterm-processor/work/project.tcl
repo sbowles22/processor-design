@@ -5,9 +5,9 @@ set device xc7a100tftg256-1
 if {[file exists "$projDir/$projName"]} { file delete -force "$projDir/$projName" }
 create_project $projName "$projDir/$projName" -part $device
 set_property design_mode RTL [get_filesets sources_1]
-set verilogSources [list "/home/spencer/processor-design/midterm-processor/work/verilog/au_plus_top_0.v" "/home/spencer/processor-design/midterm-processor/work/verilog/reset_conditioner_1.v" "/home/spencer/processor-design/midterm-processor/work/verilog/cpu_2.v" "/home/spencer/processor-design/midterm-processor/work/verilog/instRom_3.v" ]
+set verilogSources [list "/home/spencer/processor-design/midterm-processor/work/verilog/au_plus_top_0.v" "/home/spencer/processor-design/midterm-processor/work/verilog/reset_conditioner_1.v" "/home/spencer/processor-design/midterm-processor/work/verilog/simple_ram_2.v" "/home/spencer/processor-design/midterm-processor/work/verilog/cpu_3.v" "/home/spencer/processor-design/midterm-processor/work/verilog/multi_seven_seg_4.v" "/home/spencer/processor-design/midterm-processor/work/verilog/instRom_5.v" "/home/spencer/processor-design/midterm-processor/work/verilog/counter_6.v" "/home/spencer/processor-design/midterm-processor/work/verilog/hex_digit_lut_7.v" "/home/spencer/processor-design/midterm-processor/work/verilog/decoder_8.v" ]
 import_files -fileset [get_filesets sources_1] -force -norecurse $verilogSources
-set xdcSources [list "/home/spencer/processor-design/midterm-processor/work/constraint/alchitry.xdc" "/home/spencer/Downloads/alchitry-labs-1.2.5/library/components/au.xdc" ]
+set xdcSources [list "/home/spencer/processor-design/midterm-processor/work/constraint/alchitry.xdc" "/home/spencer/processor-design/midterm-processor/work/constraint/io.xdc" "/home/spencer/Downloads/alchitry-labs-1.2.5/library/components/au.xdc" ]
 read_xdc $xdcSources
 set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 update_compile_order -fileset sources_1

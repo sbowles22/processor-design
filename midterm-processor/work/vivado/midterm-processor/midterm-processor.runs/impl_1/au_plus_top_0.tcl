@@ -138,6 +138,7 @@ OPTRACE "add files" START { }
   add_files -quiet /home/spencer/processor-design/midterm-processor/work/vivado/midterm-processor/midterm-processor.runs/synth_1/au_plus_top_0.dcp
 OPTRACE "read constraints: implementation" START { }
   read_xdc /home/spencer/processor-design/midterm-processor/work/constraint/alchitry.xdc
+  read_xdc /home/spencer/processor-design/midterm-processor/work/constraint/io.xdc
   read_xdc /home/spencer/Downloads/alchitry-labs-1.2.5/library/components/au.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }

@@ -1,0 +1,20 @@
+module vga_screen_counter (
+    input clk,  // clock
+    input rst,  // reset
+    output x[10],
+    output y[10]
+  ) {
+  
+  .rst(rst) {
+    .clk(clk) {
+      counter x_dim (#SIZE(10), #TOP(640));
+    }
+    counter y_dim (#SIZE(10), #TOP(480));
+  }
+  
+  always {
+    x = x_dim.value;
+    y = y_dim.value;
+    if (x_dim.value == 640) {y_dim.clk = 1;} else {y_dim.clk = 0;}
+  }
+}

@@ -1,0 +1,38 @@
+module ind_sta_vga_timer (
+    input clk,  // clock
+    input rst,  // reset
+    output x[10],
+    output y[10],
+    output h_sync,
+    output v_sync,
+    output on_screen
+  ) {
+  
+  .rst(rst) {
+    .clk(clk) {
+      counter x_dim (#SIZE(10), #TOP(800), #DIV(2));
+    }
+    counter y_dim (#SIZE(10), #TOP(525));
+  }
+  
+  always {
+    y_dim.clk = 0;
+    on_screen = 0;
+    x = 0;
+    y = 0;
+    h_sync = 0;
+    v_sync = 0;
+    if (x_dim.value <= 640 && y_dim.value <= 480) {
+      x = x_dim.value;
+      y = y_dim.value;
+      on_screen = 1;
+    } else {
+      x = 0;
+      y = 0;
+      on_screen = 0;
+    }
+    if (657 <= x_dim.value && x_dim.value <= 752) {h_sync = 1;} else {h_sync = 0;}
+    if (491 <= y_dim.value && y_dim.value <= 492) {v_sync = 1;} else {v_sync = 0;}
+    if (x_dim.value == 800) {y_dim.clk = 1;} else {y_dim.clk = 0;}
+  }
+}

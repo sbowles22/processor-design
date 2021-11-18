@@ -1,0 +1,25 @@
+module concept (
+ input clk, 
+ input a [8], // coefficient a
+ input b [8], // coefficient b         input c [8], // coefficient c
+ output e [64] // output
+ ) {
+
+ .clk(clk) {
+ dff a_reg [8]; 
+ dff b_reg [8]; // dff c_reg [8]; 
+ dff e_reg [64]; 
+
+ dff temp_a [32];
+ dff temp_b [32]; //dff temp_c [32];
+ }
+ always {
+ a_reg.d = a; // connect inputs
+ b_reg.d = b; //c_reg.d = c;
+ e = e_reg.q; // connect output
+
+ temp_a.d = (b_reg.q - a_reg.q) * (b_reg.q - a_reg.q);
+ temp_b.d = (b_reg.q * temp_a.q) * (b_reg.q * temp_a.q); //temp_c.d = (c_reg.q * c_reg.q) * (c_reg.q * c_reg.q);
+ e_reg.d = temp_b.q * temp_b.q; // * temp_c.q
+ }
+}

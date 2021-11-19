@@ -4,6 +4,8 @@ I used the built-in LRU (least recently used) cache found as an Alchitry Au+ com
 
 I had a lot of problems with this project—simply put, I just wasn't understanding what I was trying to do at times, and I spent hours restarting just to see how I could progress differently from my last attempt. 
 
+My goals for this project were to create a functioning cache that could be pulled from and written to, develop a way (the LED turning on) to test that the cache was working, and, on a personal level, understand more of memory hierarchy in processors.
+
 I used the following sources extensively:
 - https://alchitry.com/ddr3-memory 
 - "Computer Organization and Design: The Hardware/Software Interface 5th Edition" by David A. Patterson and John L. Hennessy
